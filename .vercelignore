@@ -1,7 +1,7 @@
 .git
 .next
 node_modules
-intro
-projects
+/intro/
+/projects/
 *.log
 .DS_Store

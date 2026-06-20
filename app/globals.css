@@ -850,8 +850,8 @@ button {
   }
 
   .hero {
-    min-height: 82svh;
-    padding: 96px 0 28px;
+    min-height: 58svh;
+    padding: 84px 0 20px;
   }
 
   .hero > .eyebrow {
@@ -859,7 +859,7 @@ button {
   }
 
   .hero-bottom {
-    top: 65vh;
+    top: 50vh;
   }
 
   .scroll-cue {
@@ -868,8 +868,8 @@ button {
 
   .about {
     grid-template-columns: 1fr;
-    gap: 44px;
-    padding-block: 40px 56px;
+    gap: 24px;
+    padding-block: 24px 40px;
   }
 
   .about-image {
@@ -879,21 +879,22 @@ button {
   }
 
   .about-copy h2 {
-    margin-top: 28px;
+    margin: 18px 0 20px;
     font-size: 48px;
   }
 
   .about-copy > p:not(.section-index) {
+    margin-bottom: 24px;
     font-size: 16px;
   }
 
   .work-section {
-    padding-block: 32px 72px;
+    padding-block: 24px 48px;
   }
 
   .section-heading {
     display: block;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .section-heading h2 {
@@ -901,12 +902,12 @@ button {
   }
 
   .work-footer {
-    padding-top: 36px;
+    padding-top: 28px;
   }
 
   .project-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 26px;
   }
 
   .project-grid > .reveal:has(.project-card-featured) {
@@ -922,7 +923,7 @@ button {
   }
 
   .site-footer {
-    margin-top: 56px;
+    margin-top: 40px;
   }
 
   .footer-shell {
@@ -930,11 +931,11 @@ button {
   }
 
   .footer-cta {
-    padding: 52px 0 0;
+    padding: 40px 0 0;
   }
 
   .footer-label {
-    margin-bottom: 22px;
+    margin-bottom: 16px;
   }
 
   .footer-email {
@@ -949,7 +950,7 @@ button {
   }
 
   .footer-base {
-    padding: 32px 0 28px;
+    padding: 24px 0;
   }
 
   .footer-base-content {
@@ -958,16 +959,16 @@ button {
   }
 
   .projects-page {
-    padding-top: 92px;
+    padding-top: 82px;
   }
 
   .projects-hero {
-    min-height: 48svh;
-    padding-bottom: 34px;
+    min-height: 0;
+    padding-bottom: 24px;
   }
 
   .projects-hero h1 {
-    margin: auto 0 24px;
+    margin: 18px 0 0;
     font-size: 24vw;
   }
 
@@ -976,13 +977,13 @@ button {
   }
 
   .filters {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .filter-selects {
     grid-template-columns: 1fr;
     gap: 12px;
-    padding: 16px 0;
+    padding: 10px 0;
   }
 
   .filter-selects label {
@@ -990,7 +991,7 @@ button {
   }
 
   .filter-result {
-    min-height: 58px;
+    min-height: 48px;
   }
 
   .filter-dock {
@@ -999,19 +1000,19 @@ button {
   }
 
   .project-detail {
-    padding-top: 110px;
-    padding-bottom: 72px;
+    padding-top: 88px;
+    padding-bottom: 52px;
   }
 
   .project-detail-header h1 {
-    margin: 20px 0 44px;
+    margin: 16px 0 28px;
     font-size: 15vw;
   }
 
   .project-detail-summary {
     grid-template-columns: 1fr;
-    gap: 40px;
-    margin-bottom: 44px;
+    gap: 28px;
+    margin-bottom: 32px;
   }
 
   .project-detail-summary dl > div {
@@ -1019,11 +1020,11 @@ button {
   }
 
   .all-projects-link {
-    padding: 28px 0 36px;
+    padding: 24px 0 28px;
   }
 
   .next-projects {
-    padding-top: 36px;
+    padding-top: 28px;
   }
 }
 
