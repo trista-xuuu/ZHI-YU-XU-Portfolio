@@ -1,0 +1,17 @@
+{
+  "name": "ZHI YU XU — Portfolio",
+  "short_name": "ZHI YU XU",
+  "description": "徐芝瑜的網站企劃、UIUX 設計與專案作品集。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f7f5",
+  "theme_color": "#f7f7f5",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
