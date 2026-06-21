@@ -850,8 +850,8 @@ button {
   }
 
   .hero {
-    min-height: 58svh;
-    padding: 84px 0 20px;
+    min-height: 260px;
+    padding: 82px 0 16px;
   }
 
   .hero > .eyebrow {
@@ -859,7 +859,7 @@ button {
   }
 
   .hero-bottom {
-    top: 50vh;
+    top: 215px;
   }
 
   .scroll-cue {
@@ -869,7 +869,7 @@ button {
   .about {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding-block: 24px 40px;
+    padding-block: 12px 40px;
   }
 
   .about-image {

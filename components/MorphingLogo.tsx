@@ -19,7 +19,7 @@ export function MorphingLogo() {
       const eased = 1 - Math.pow(1 - progress, 3);
 
       const startX = mobile ? 16 : 32;
-      const startY = mobile ? window.innerHeight * 0.24 : window.innerHeight * 0.31;
+      const startY = mobile ? 132 : window.innerHeight * 0.31;
       const containerWidth = Math.min(
         window.innerWidth - (mobile ? 32 : 64),
         1600,
