@@ -44,7 +44,7 @@ button {
 
 .site-header {
   position: fixed;
-  z-index: 50;
+  z-index: 60;
   inset: 18px 32px auto;
   height: 52px;
   display: flex;
@@ -850,7 +850,7 @@ button {
   }
 
   .hero {
-    min-height: 192px;
+    min-height: 200px;
     padding: 82px 0 8px;
   }
 
@@ -859,7 +859,7 @@ button {
   }
 
   .hero-bottom {
-    top: 155px;
+    top: 172px;
   }
 
   .scroll-cue {
@@ -1000,7 +1000,7 @@ button {
   }
 
   .project-detail {
-    padding-top: 88px;
+    padding-top: 96px;
     padding-bottom: 52px;
   }
 
