@@ -850,8 +850,8 @@ button {
   }
 
   .hero {
-    min-height: 260px;
-    padding: 82px 0 16px;
+    min-height: 192px;
+    padding: 82px 0 8px;
   }
 
   .hero > .eyebrow {
@@ -859,7 +859,7 @@ button {
   }
 
   .hero-bottom {
-    top: 215px;
+    top: 155px;
   }
 
   .scroll-cue {
@@ -869,7 +869,7 @@ button {
   .about {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding-block: 12px 40px;
+    padding-block: 8px 40px;
   }
 
   .about-image {
@@ -880,7 +880,7 @@ button {
 
   .about-copy h2 {
     margin: 18px 0 20px;
-    font-size: 48px;
+    font-size: 40px;
   }
 
   .about-copy > p:not(.section-index) {
@@ -898,7 +898,7 @@ button {
   }
 
   .section-heading h2 {
-    font-size: 54px;
+    font-size: 44px;
   }
 
   .work-footer {
@@ -1006,7 +1006,7 @@ button {
 
   .project-detail-header h1 {
     margin: 16px 0 28px;
-    font-size: 15vw;
+    font-size: clamp(42px, 11vw, 56px);
   }
 
   .project-detail-summary {
