@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 
 export function MorphingLogo() {
   const logoRef = useRef<HTMLDivElement>(null);
-  const measureRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const logo = logoRef.current;

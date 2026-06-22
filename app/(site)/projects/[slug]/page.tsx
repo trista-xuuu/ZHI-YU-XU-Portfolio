@@ -16,7 +16,7 @@ type ProjectPageProps = {
 
 export async function generateStaticParams() {
   const allProjects = await client.fetch(projectsQuery);
-  return allProjects.map((project: any) => ({ slug: project.slug }));
+  return allProjects.map((project: { slug: string }) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -40,14 +40,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const allProjects = await client.fetch(projectsQuery);
 
   const sameTypeProjects = allProjects.filter(
-    (item: any) =>
+    (item: { slug: string; types?: string[] }) =>
       item.slug !== project.slug &&
       item.types?.some((type: string) => project.types?.includes(type)),
   );
   const sameTagProjects = allProjects.filter(
-    (item: any) =>
+    (item: { slug: string; tags?: string[] }) =>
       item.slug !== project.slug &&
-      !sameTypeProjects.some((related: any) => related.slug === item.slug) &&
+      !sameTypeProjects.some((related: { slug: string }) => related.slug === item.slug) &&
       item.tags?.some((tag: string) => project.tags?.includes(tag)),
   );
   const relatedProjects = [...sameTypeProjects, ...sameTagProjects].slice(0, 2);

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function ProjectsPage() {
   const allProjects = await client.fetch(projectsQuery);
-  const projectYears = allProjects.map((project: any) => project.year);
+  const projectYears = allProjects.map((project: { year: string }) => project.year);
   const earliestYear = Math.min(...projectYears);
   const latestYear = Math.max(...projectYears);
 
