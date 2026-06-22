@@ -61,7 +61,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <HomeStats stats={homepage?.stats || [
+      <HomeStats stats={(homepage?.stats && homepage.stats.length > 0) ? homepage.stats : [
         { _key: "1", label: "YEARS OF EXPERIENCE", isNumber: true, numberValue: 5, numberSuffix: "+", isSolid: false },
         { _key: "2", label: "PROJECTS DELIVERED", isNumber: true, numberValue: 30, numberSuffix: "+", isSolid: true },
         { _key: "3", label: "CLIENTS GLOBALLY", isNumber: true, numberValue: 15, numberSuffix: "+", isSolid: false },
