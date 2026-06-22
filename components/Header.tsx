@@ -57,7 +57,7 @@ export function Header() {
         <Link className={pathname === "/projects" ? "active" : ""} href="/projects">
           Projects
         </Link>
-        <a href="mailto:trista10418063@gmail.com">Contact ↗</a>
+        <a href="mailto:trista10418063@gmail.com">Contact ↗&#xFE0E;</a>
       </nav>
     </header>
   );

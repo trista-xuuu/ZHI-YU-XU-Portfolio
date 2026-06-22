@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Project, ProjectType } from "@/data/projects";
 import { ProjectGrid } from "@/components/ProjectGrid";
@@ -14,6 +15,16 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
   const [type, setType] = useState<ProjectType | "all">("all");
   const [filterDocked, setFilterDocked] = useState(false);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
+
+  const handleYearChange = (newYear: number | "all") => {
+    setYear(newYear);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleTypeChange = (newType: ProjectType | "all") => {
+    setType(newType);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const filtersRef = useRef<HTMLElement>(null);
   const selectedTag = searchParams.get("tag");
   const years = useMemo(
@@ -25,16 +36,40 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
     const filters = filtersRef.current;
     if (!filters) return;
 
-    const observer = new IntersectionObserver(
+    let isFiltersPassed = false;
+    let isFooterVisible = false;
+
+    const updateDockState = () => {
+      setFilterDocked(isFiltersPassed && !isFooterVisible);
+    };
+
+    const filtersObserver = new IntersectionObserver(
       ([entry]) => {
-        setFilterDocked(!entry.isIntersecting && entry.boundingClientRect.bottom < 0);
+        isFiltersPassed = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
         if (entry.isIntersecting) setFilterPanelOpen(false);
+        updateDockState();
       },
       { threshold: 0 },
     );
 
-    observer.observe(filters);
-    return () => observer.disconnect();
+    const footerObserver = new IntersectionObserver(
+      ([entry]) => {
+        isFooterVisible = entry.isIntersecting;
+        if (entry.isIntersecting) setFilterPanelOpen(false);
+        updateDockState();
+      },
+      { threshold: 0, rootMargin: "0px" },
+    );
+
+    filtersObserver.observe(filters);
+
+    const footer = document.getElementById("contact");
+    if (footer) footerObserver.observe(footer);
+
+    return () => {
+      filtersObserver.disconnect();
+      footerObserver.disconnect();
+    };
   }, []);
 
   const filteredProjects = useMemo(
@@ -55,8 +90,8 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
           years={years}
           year={year}
           type={type}
-          onYearChange={setYear}
-          onTypeChange={setType}
+          onYearChange={handleYearChange}
+          onTypeChange={handleTypeChange}
         />
         <div className="filter-result">
           <div className="filter-count">
@@ -71,6 +106,7 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
                 setYear("all");
                 setType("all");
                 router.replace("/projects", { scroll: false });
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
               CLEAR ×
@@ -89,6 +125,7 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
             onClick={() => {
               setYear("all");
               setType("all");
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
             清除篩選
@@ -96,7 +133,7 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
         </div>
       )}
 
-      {filterDocked && (
+      {filterDocked && typeof document !== "undefined" && createPortal(
         <div className={filterPanelOpen ? "filter-dock is-open" : "filter-dock"}>
           {filterPanelOpen && (
             <div className="filter-dock-panel">
@@ -114,8 +151,8 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
                 years={years}
                 year={year}
                 type={type}
-                onYearChange={setYear}
-                onTypeChange={setType}
+                onYearChange={handleYearChange}
+                onTypeChange={handleTypeChange}
                 compact
               />
             </div>
@@ -128,10 +165,11 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
             onClick={() => setFilterPanelOpen((value) => !value)}
           >
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 7H20M7 12H17M10 17H14" />
+              <path strokeLinejoin="round" d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
             </svg>
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

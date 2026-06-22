@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Noto_Sans_TC, Space_Grotesk } from "next/font/google";
+import { Noto_Sans_TC } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Preloader } from "@/components/Preloader";
 
 const sans = Noto_Sans_TC({
   variable: "--font-sans",
@@ -10,11 +11,7 @@ const sans = Noto_Sans_TC({
   display: "swap",
 });
 
-const display = Space_Grotesk({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-});
+
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -28,7 +25,8 @@ export const metadata: Metadata = {
   authors: [{ name: "ZHI YU XU" }],
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/icon.svg",
+    icon: "/favicon_2.svg",
+    shortcut: "/favicon_2.svg",
   },
   alternates: {
     canonical: "/",
@@ -63,8 +61,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-Hant" id="top">
-      <body className={`${sans.variable} ${display.variable}`}>
+    <html lang="zh-Hant" id="top" suppressHydrationWarning>
+      <body className={`${sans.variable}`}>
+        <Preloader />
         <Header />
         {children}
         <SiteFooter />

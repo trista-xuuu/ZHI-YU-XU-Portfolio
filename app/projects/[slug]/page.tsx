@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
+import { Reveal } from "@/components/Reveal";
 import { projects } from "@/data/projects";
 
 type ProjectPageProps = {
@@ -48,22 +49,26 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <main className="project-detail page-shell">
       <header className="project-detail-header">
-        <p className="eyebrow">
-          PROJECT / {project.year} · {project.types.join(" · ")}
-        </p>
-        <h1>{project.name}</h1>
+        <Reveal type="text">
+          <p className="eyebrow">
+            PROJECT / {project.year} · {project.types.join(" · ")}
+          </p>
+        </Reveal>
+        <Reveal type="text">
+          <h1>{project.name}</h1>
+        </Reveal>
       </header>
 
       <section className="project-detail-summary">
-        <div className="project-detail-intro">
+        <Reveal type="fade-up" className="project-detail-intro">
           <p>{project.intro}</p>
           <div className="project-detail-actions">
-            <a href={project.url} target="_blank" rel="noreferrer">
-              VISIT WEBSITE ↗
+            <a href={project.url} target="_blank" rel="noreferrer" className="pill-link is-solid" data-text="VISIT WEBSITE ↗&#xFE0E;">
+              <span>VISIT WEBSITE ↗&#xFE0E;</span>
             </a>
             <CopyLinkButton />
           </div>
-        </div>
+        </Reveal>
 
         <dl>
           <div>
@@ -91,7 +96,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </dl>
       </section>
 
-      <div className="project-detail-image">
+      <Reveal type="image" className="project-detail-image">
         <Image
           src={project.image}
           alt={`${project.name} 專案網站畫面`}
@@ -99,11 +104,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           sizes="(max-width: 760px) 100vw, 96vw"
           priority
         />
-      </div>
+      </Reveal>
 
       <div className="all-projects-link">
-        <Link className="pill-link" href="/projects">
-          ALL PROJECTS <span>↗</span>
+        <Link className="pill-link" href="/projects" data-text="ALL PROJECTS">
+          <span>ALL PROJECTS</span>
         </Link>
       </div>
 

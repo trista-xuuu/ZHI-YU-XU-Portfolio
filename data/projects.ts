@@ -25,7 +25,7 @@ export const projects: Project[] = [
     client: "佑帷有限公司",
     types: ["官方網站"],
     roles: ["企劃", "UIUX 設計", "前端開發", "零售業"],
-    tags: ["AI Project", "企劃", "UIUX", "RWD 網站"],
+    tags: ["AI Project", "RWD 網站"],
     intro:
       "KISURA 成立於 1996 年，是佑帷有限公司旗下的純鈦眼鏡品牌。以 AI 工具為核心，協助品牌從策略到執行，進行全面數位轉型規劃。",
     image: "/images/projects/kisura.webp",
@@ -145,7 +145,7 @@ export const projects: Project[] = [
     client: "華碩",
     types: ["ESG 網站"],
     roles: ["企劃", "UIUX 設計"],
-    tags: ["RWD 網站", "ESG", "科技業"],
+    tags: ["RWD 網站", "ESG", "科技業", "WCAG 無障礙"],
     intro:
       "在「One ASUS」的精神引領之下，華碩將 ESG 納入品牌及行銷的重要環節。除了訂定永續品牌溝通語言—“Sustaining an incredible future”，並在「循環經濟」、「責任製造」、「氣候行動」、「價值創造」四大面向，打造一致性的永續溝通語言。透過 ESG 網站及永續報告書，持續性地傳遞華碩永續影響力，及對環境與社會的重要承諾。",
     image: "/images/projects/asus-esg.webp",
@@ -163,7 +163,7 @@ export const projects: Project[] = [
     tags: ["RWD 網站", "科技業"],
     intro:
       "UfiSpace 為 5G 開放網路架構的創新領導品牌，並陸續推出業界第一的蜂巢基地台回傳路由器 (CSGR) 和世界第一的分散式解構機箱路由系統 (DDC)。其致力於建立合作夥伴生態圈驅動創新，實現網路建置開放性的真正價值：高度彈性、開放性及相容性。",
-    image: "/images/projects/ufispace.webp",
+    image: "/images/projects/ufispace_2.webp",
     url: "https://www.ufispace.com/tw",
   },
   {
@@ -172,7 +172,7 @@ export const projects: Project[] = [
     year: 2022,
     date: "Nov, 2022",
     sortDate: "2022-11",
-    client: "優達科技",
+    client: "青松健康",
     types: ["企業網站"],
     roles: ["企劃"],
     tags: ["RWD 網站", "長照業"],
@@ -235,7 +235,7 @@ export const projects: Project[] = [
     client: "奇美博物館",
     types: ["官方網站"],
     roles: ["UIUX 設計"],
-    tags: ["UIUX", "RWD 網站"],
+    tags: ["RWD 網站"],
     intro:
       "奇美博物館成立的初衷，來自一份「分享」的心意，而分享的目的，則是希望「為大眾帶來幸福與溫暖」。從藝文平權、展覽活動、典藏維護、人才培育等面向衍生出不同的理念與實踐行動。除了時時刻刻保持與大眾緊密的連結，與時俱進持續創新，也期盼在用心耕耘之下，成為一個提升文化美學素養、療癒大眾心靈的幸福博物館。",
     image: "/images/projects/chimei-museum.webp",

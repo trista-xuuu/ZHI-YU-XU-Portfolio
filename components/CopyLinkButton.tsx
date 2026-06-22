@@ -26,24 +26,43 @@ export function CopyLinkButton() {
   };
 
   return (
-    <button
-      className="copy-link-icon"
-      type="button"
-      aria-label={copied ? "作品連結已複製" : "複製作品連結"}
-      title={copied ? "Copied" : "Copy link"}
-      onClick={copyLink}
-    >
-      {copied ? (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5 12.5L9.5 17L19 7.5" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9.5 14.5L14.5 9.5" />
-          <path d="M7.5 17.5L5.5 19.5C3.57 21.43.57 18.43 2.5 16.5L6.5 12.5C8.43 10.57 11.57 10.57 13.5 12.5" />
-          <path d="M16.5 6.5L18.5 4.5C20.43 2.57 23.43 5.57 21.5 7.5L17.5 11.5C15.57 13.43 12.43 13.43 10.5 11.5" />
-        </svg>
+    <>
+      <button
+        className="copy-link-icon"
+        type="button"
+        aria-label={copied ? "作品連結已複製" : "複製作品連結"}
+        title={copied ? "Copied" : "Copy link"}
+        onClick={copyLink}
+      >
+        {copied ? (
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12.5L9.5 17L19 7.5" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9.5 14.5L14.5 9.5" />
+            <path d="M7.5 17.5L5.5 19.5C3.57 21.43.57 18.43 2.5 16.5L6.5 12.5C8.43 10.57 11.57 10.57 13.5 12.5" />
+            <path d="M16.5 6.5L18.5 4.5C20.43 2.57 23.43 5.57 21.5 7.5L17.5 11.5C15.57 13.43 12.43 13.43 10.5 11.5" />
+          </svg>
+        )}
+      </button>
+      {copied && (
+        <div style={{
+          position: "fixed",
+          bottom: "2rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "#111",
+          color: "#fff",
+          padding: "10px 20px",
+          borderRadius: "8px",
+          zIndex: 9999,
+          fontSize: "14px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        }}>
+          已複製連結
+        </div>
       )}
-    </button>
+    </>
   );
 }

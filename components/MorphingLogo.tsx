@@ -4,12 +4,15 @@ import { useEffect, useRef } from "react";
 
 export function MorphingLogo() {
   const logoRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const logo = logoRef.current;
     if (!logo) return;
 
     let frame = 0;
+    let cachedWidthPerPixel = 4.4; // Initial safe fallback
+    let hasMeasured = false;
 
     const render = () => {
       const mobile = window.innerWidth <= 760;
@@ -18,23 +21,47 @@ export function MorphingLogo() {
       const progress = Math.min(Math.max(window.scrollY / distance, 0), 1);
       const eased = 1 - Math.pow(1 - progress, 3);
 
-      const startX = mobile ? 16 : 32;
-      const startY = mobile ? 132 : window.innerHeight * 0.31;
+      const clientWidth = document.documentElement.clientWidth;
       const containerWidth = Math.min(
-        window.innerWidth - (mobile ? 32 : 64),
+        clientWidth - (mobile ? 32 : 64),
         1600,
       );
-      const startSize = mobile
-        ? Math.min(window.innerWidth * 0.205, 80)
-        : containerWidth / 4.3;
+      
+      if (!hasMeasured) {
+        const oldSize = logo.style.fontSize;
+        const oldSpacing = logo.style.letterSpacing;
+        
+        // Temporarily set to 100px to measure exactly
+        logo.style.fontSize = "100px";
+        logo.style.letterSpacing = "-6.5px";
+        const rect = logo.getBoundingClientRect();
+        
+        if (rect.width > 0) {
+          cachedWidthPerPixel = rect.width / 100;
+          hasMeasured = true;
+        }
+        
+        logo.style.fontSize = oldSize;
+        logo.style.letterSpacing = oldSpacing;
+      }
+
+      const startY = mobile ? 132 : window.innerHeight * 0.31;
+      const widthPerPixel = cachedWidthPerPixel;
+      // Size close to container size (98%)
+      const fittedSize = (containerWidth * 0.98) / widthPerPixel;
+      const startSize = fittedSize;
       const targetX = mobile ? 30 : 52;
       const targetY = mobile ? 31 : 37;
       const targetSize = mobile ? 11 : 14;
+      
+      // Restore the exact original left-alignment so it shrinks perfectly into the logo
+      const startX = mobile ? 16 : 32;
       const startSpacing = startSize * -0.065;
       const targetSpacing = targetSize * 0.12;
       const currentProgress = reduceMotion ? (progress > 0 ? 1 : 0) : eased;
 
       logo.style.left = `${startX + (targetX - startX) * currentProgress}px`;
+      logo.style.transform = `none`;
       logo.style.top = `${startY + (targetY - startY) * currentProgress}px`;
       logo.style.fontSize = `${startSize + (targetSize - startSize) * currentProgress}px`;
       logo.style.letterSpacing = `${
@@ -50,8 +77,15 @@ export function MorphingLogo() {
     };
 
     render();
+    document.fonts.ready.then(() => {
+      hasMeasured = false; // Re-measure with custom font
+      requestRender();
+    });
     window.addEventListener("scroll", requestRender, { passive: true });
-    window.addEventListener("resize", requestRender);
+    window.addEventListener("resize", () => {
+      hasMeasured = false; // Re-measure if screen resizes or orientation changes
+      requestRender();
+    });
 
     return () => {
       cancelAnimationFrame(frame);

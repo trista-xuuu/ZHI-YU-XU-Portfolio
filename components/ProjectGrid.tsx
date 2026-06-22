@@ -7,12 +7,12 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <div className="project-grid">
       {projects.map((project, index) => (
-        <Reveal key={project.slug}>
+        <div key={project.slug}>
           <Link
             className={`project-card ${index === 0 ? "project-card-featured" : ""}`}
             href={`/projects/${project.slug}`}
           >
-            <div className="project-image">
+            <Reveal type="image" className="project-image">
               <Image
                 src={project.image}
                 alt={`${project.name} 專案網站畫面`}
@@ -25,18 +25,18 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
               />
               <div className="project-overlay">
                 <span>VIEW PROJECT</span>
-                <span>↗</span>
+                <span>↗&#xFE0E;</span>
               </div>
-            </div>
-            <div className="project-meta">
+            </Reveal>
+            <Reveal type="fade-up" className="project-meta">
               <div>
-                <h3>{project.name}</h3>
+                <h5>{project.name}</h5>
                 <p>{project.types.join(" · ")}</p>
               </div>
               <span>{project.year}</span>
-            </div>
+            </Reveal>
           </Link>
-        </Reveal>
+        </div>
       ))}
     </div>
   );
