@@ -115,7 +115,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <section className="next-projects">
         <div className="section-heading">
           <div>
-            <p className="section-index">RELATED WORK</p>
+            <p className="section-index">RELATED</p>
             <h2>Next Projects</h2>
           </div>
         </div>

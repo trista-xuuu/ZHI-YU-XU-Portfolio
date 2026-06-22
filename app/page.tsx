@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { Reveal } from "@/components/Reveal";
 import { MorphingLogo } from "@/components/MorphingLogo";
+import { HomeStats } from "@/components/HomeStats";
 import { projects } from "@/data/projects";
 
 export default function Home() {
@@ -34,7 +35,7 @@ export default function Home() {
           />
         </Reveal>
         <div className="about-copy">
-          <Reveal type="text"><p className="section-index">01 / ABOUT</p></Reveal>
+          <Reveal type="text"><p className="section-index">ABOUT</p></Reveal>
           <Reveal type="text">
             <h1>
               Grows together,
@@ -56,11 +57,13 @@ export default function Home() {
         </div>
       </section>
 
+      <HomeStats />
+
       <section className="work-section page-shell">
         <div className="section-heading">
           <div>
-            <Reveal type="text"><p className="section-index">02 / SELECTED WORK</p></Reveal>
-            <Reveal type="text"><h2>New Projects</h2></Reveal>
+            <Reveal type="text"><p className="section-index">PROJECTS</p></Reveal>
+            <Reveal type="text"><h2>Latest Published</h2></Reveal>
           </div>
         </div>
         <ProjectGrid projects={latestProjects} />
