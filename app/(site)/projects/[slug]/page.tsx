@@ -92,7 +92,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div>
             <dt>TAG</dt>
             <dd className="project-tags">
-              {project.tags.map((tag) => (
+              {project.tags.map((tag: string) => (
                 <Link href={`/projects?tag=${encodeURIComponent(tag)}`} key={tag}>
                   {tag}
                 </Link>
