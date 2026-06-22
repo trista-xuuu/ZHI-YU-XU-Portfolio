@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export type RevealType = "fade-up" | "image" | "text";
 
-export function Reveal({ children, type = "fade-up", className = "" }: { children: React.ReactNode, type?: RevealType, className?: string }) {
+export function Reveal({ children, type = "fade-up", className = "", delay = 0 }: { children: React.ReactNode, type?: RevealType, className?: string, delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -27,7 +27,11 @@ export function Reveal({ children, type = "fade-up", className = "" }: { childre
   }, []);
 
   return (
-    <div ref={ref} className={`reveal reveal-${type} ${visible ? "is-visible" : ""} ${className}`}>
+    <div 
+      ref={ref} 
+      className={`reveal reveal-${type} ${visible ? "is-visible" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}s` }}
+    >
       {children}
     </div>
   );
