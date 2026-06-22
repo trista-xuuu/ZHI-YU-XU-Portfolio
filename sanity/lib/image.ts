@@ -6,8 +6,7 @@ const imageBuilder = createImageUrlBuilder({
   dataset: dataset || "",
 });
 
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-export const urlForImage = (source: SanityImageSource) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const urlForImage = (source: any) => {
   return imageBuilder?.image(source).auto("format").fit("max");
 };
