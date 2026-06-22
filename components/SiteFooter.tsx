@@ -1,11 +1,12 @@
-export function SiteFooter() {
+export function SiteFooter({ email }: { email?: string }) {
+  const displayEmail = email || "trista10418063@gmail.com";
   return (
     <footer className="site-footer" id="contact">
       <div className="footer-cta">
         <div className="footer-shell">
           <p className="footer-label">CONTACT</p>
-          <a className="footer-email" href="mailto:trista10418063@gmail.com">
-            <span>trista10418063@gmail.com</span>
+          <a className="footer-email" href={`mailto:${displayEmail}`}>
+            <span>{displayEmail}</span>
             <svg viewBox="0 0 72 72" fill="none" aria-hidden="true">
               <path d="M8 11L65 35L8 61L20 39L52 35L20 31L8 11Z" />
             </svg>

@@ -24,8 +24,10 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
                 }
               />
               <div className="project-overlay">
-                <span>VIEW PROJECT</span>
-                <span>↗&#xFE0E;</span>
+                <div className="project-overlay-content">
+                  <span>VIEW PROJECT</span>
+                  <span>↗&#xFE0E;</span>
+                </div>
               </div>
             </Reveal>
             <Reveal type="fade-up" className="project-meta">

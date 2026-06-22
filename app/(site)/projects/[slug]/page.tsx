@@ -5,19 +5,23 @@ import { notFound } from "next/navigation";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { Reveal } from "@/components/Reveal";
-import { projects } from "@/data/projects";
+import { client } from "@/sanity/lib/client";
+import { projectBySlugQuery, projectsQuery } from "@/sanity/lib/queries";
+
+export const revalidate = 60;
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+export async function generateStaticParams() {
+  const allProjects = await client.fetch(projectsQuery);
+  return allProjects.map((project: any) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
+  const project = await client.fetch(projectBySlugQuery, { slug });
 
   if (!project) return {};
 
@@ -29,20 +33,22 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
+  const project = await client.fetch(projectBySlugQuery, { slug });
 
   if (!project) notFound();
 
-  const sameTypeProjects = projects.filter(
-    (item) =>
+  const allProjects = await client.fetch(projectsQuery);
+
+  const sameTypeProjects = allProjects.filter(
+    (item: any) =>
       item.slug !== project.slug &&
-      item.types.some((type) => project.types.includes(type)),
+      item.types?.some((type: string) => project.types?.includes(type)),
   );
-  const sameTagProjects = projects.filter(
-    (item) =>
+  const sameTagProjects = allProjects.filter(
+    (item: any) =>
       item.slug !== project.slug &&
-      !sameTypeProjects.some((related) => related.slug === item.slug) &&
-      item.tags.some((tag) => project.tags.includes(tag)),
+      !sameTypeProjects.some((related: any) => related.slug === item.slug) &&
+      item.tags?.some((tag: string) => project.tags?.includes(tag)),
   );
   const relatedProjects = [...sameTypeProjects, ...sameTagProjects].slice(0, 2);
 

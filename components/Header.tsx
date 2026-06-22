@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function Header() {
+export function Header({ email }: { email?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [logoSettled, setLogoSettled] = useState(pathname !== "/");
@@ -57,7 +57,7 @@ export function Header() {
         <Link className={pathname === "/projects" ? "active" : ""} href="/projects">
           Projects
         </Link>
-        <a href="mailto:trista10418063@gmail.com">Contact ↗&#xFE0E;</a>
+        <a href={`mailto:${email || "trista10418063@gmail.com"}`}>Contact ↗&#xFE0E;</a>
       </nav>
     </header>
   );

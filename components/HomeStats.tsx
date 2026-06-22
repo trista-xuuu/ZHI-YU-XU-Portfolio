@@ -49,32 +49,40 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span ref={nodeRef}>0</span>;
 }
 
-export function HomeStats() {
+type StatItem = {
+  _key: string;
+  label: string;
+  isNumber: boolean;
+  numberValue?: number;
+  numberSuffix?: string;
+  unit?: string;
+  textValue?: string;
+  isSolid: boolean;
+};
+
+export function HomeStats({ stats }: { stats: StatItem[] }) {
+  if (!stats || stats.length === 0) return null;
+
   return (
     <section className="home-stats page-shell">
       <div className="stats-grid">
-        <Reveal type="fade-up" delay={0}>
-          <div className="stat-card is-hollow">
-            <p className="stat-label">UIUX & Planner</p>
-            <p className="stat-value">
-              <span><AnimatedNumber value={5} />+</span><span className="stat-unit">years</span>
-            </p>
-          </div>
-        </Reveal>
-        <Reveal type="fade-up" delay={0.1}>
-          <div className="stat-card is-hollow">
-            <p className="stat-label">Published</p>
-            <p className="stat-value">
-              <AnimatedNumber value={15} /><span className="stat-unit">Projects</span>
-            </p>
-          </div>
-        </Reveal>
-        <Reveal type="fade-up" delay={0.2}>
-          <div className="stat-card is-solid">
-            <p className="stat-label">Awards</p>
-            <p className="stat-value">Red dot Best of the Best</p>
-          </div>
-        </Reveal>
+        {stats.map((stat, index) => (
+          <Reveal type="fade-up" delay={index * 0.1} key={stat._key}>
+            <div className={`stat-card ${stat.isSolid ? "is-solid" : "is-hollow"}`}>
+              <p className="stat-label">{stat.label}</p>
+              <p className="stat-value">
+                {stat.isNumber ? (
+                  <>
+                    <span><AnimatedNumber value={stat.numberValue || 0} />{stat.numberSuffix}</span>
+                    {stat.unit && <span className="stat-unit">{stat.unit}</span>}
+                  </>
+                ) : (
+                  <>{stat.textValue}</>
+                )}
+              </p>
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

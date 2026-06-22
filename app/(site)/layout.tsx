@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import { Noto_Sans_TC } from "next/font/google";
-import "./globals.css";
-
-
-const sans = Noto_Sans_TC({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
+import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
+import { Preloader } from "@/components/Preloader";
+import { client } from "@/sanity/lib/client";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
 
 
 
@@ -53,16 +49,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteSettings = await client.fetch(siteSettingsQuery);
+  const email = siteSettings?.email || "trista10418063@gmail.com";
+
   return (
-    <html lang="zh-Hant" id="top" suppressHydrationWarning>
-      <body className={`${sans.variable}`}>
-        {children}
-      </body>
-    </html>
+    <>
+      <Preloader />
+      <Header email={email} />
+      {children}
+      <SiteFooter email={email} />
+    </>
   );
 }
